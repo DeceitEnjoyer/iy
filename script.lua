@@ -6936,7 +6936,7 @@ addcmd('togglenoclip',{},function(args, speaker)
 end)
 
 FLYING = false
-QEfly = true
+--[[QEfly = true
 iyflyspeed = 1
 vehicleflyspeed = 1
 function sFLY(vfly)
@@ -7027,15 +7027,55 @@ function sFLY(vfly)
 		end
 	end)
 	FLY()
+end]]
+
+local flyConnection
+
+function sFLY()
+	FLYING = true
+
+	flyConnection = RunService.RenderStepped:Connect(function()
+		if not rootPart or not humanoid or humanoid.Health <= 0 then return end
+
+		local moveDirection = Vector3.zero
+		local camCF = workspace.CurrentCamera.CFrame
+		local speed = (50 / 16) * (humanoid.WalkSpeed / 2.2)
+
+		if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+			moveDirection += camCF.LookVector
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+			moveDirection -= camCF.LookVector
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+			moveDirection -= camCF.RightVector
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+			moveDirection += camCF.RightVector
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.E) then
+			moveDirection += Vector3.yAxis
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.Q) then
+			moveDirection -= Vector3.yAxis
+		end
+
+		if moveDirection.Magnitude > 0 then
+			moveDirection = moveDirection.Unit * speed
+		end
+
+        if moveDirection.Magnitude == 0 then
+            rootPart.AssemblyLinearVelocity = Vector3.new(0, 1.1, 0)
+        else
+            rootPart.AssemblyLinearVelocity = moveDirection
+        end
+
+	end)
 end
 
 function NOFLY()
 	FLYING = false
-	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
-	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-		Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
-	end
-	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
+	if flyConnection then flyConnection:Disconnect();flyConnection = nil end
 end
 
 local velocityHandlerName = randomString()
