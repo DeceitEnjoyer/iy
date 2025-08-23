@@ -7038,8 +7038,10 @@ function sFLY()
 	local char = plr.Character or plr.CharacterAdded:Wait()
 	local humanoid = char:FindFirstChildOfClass("Humanoid")
 
+	local rootPart = getRoot(char)
+
 	flyConnection = RunService.RenderStepped:Connect(function()
-		if not getRoot(char) or not humanoid or humanoid.Health <= 0 then return end
+		if not rootPart or not humanoid or humanoid.Health <= 0 then return end
 
 		local moveDirection = Vector3.zero
 		local camCF = workspace.CurrentCamera.CFrame
