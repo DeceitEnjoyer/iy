@@ -6967,9 +6967,9 @@ function sFLY(vfly)
 		task.spawn(function()
 			repeat task.wait()
 				local camera = workspace.CurrentCamera
-				if not vfly and humanoid then
-					humanoid.PlatformStand = true
-				end
+				--if not vfly and humanoid then
+				--	humanoid.PlatformStand = true
+				--end
 
 				if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
 					SPEED = 50
