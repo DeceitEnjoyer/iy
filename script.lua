@@ -6131,7 +6131,10 @@ function onInputBegan(input,gameProcessed)
 			end
 		end
 	end
-	canFLY = not gameProcessed
+	local kc = input.KeyCode
+	if kc == Enum.KeyCode.W or kc == Enum.KeyCode.A or kc == Enum.KeyCode.S or kc == Enum.KeyCode.D then
+		canFLY = not gameProcessed
+	end
 end
 
 function onInputEnded(input,gameProcessed)
@@ -6144,7 +6147,10 @@ function onInputEnded(input,gameProcessed)
 			end
 		end
 	end
-	canFLY = not gameProcessed
+	local kc = input.KeyCode
+	if kc == Enum.KeyCode.W or kc == Enum.KeyCode.A or kc == Enum.KeyCode.S or kc == Enum.KeyCode.D then
+		canFLY = not gameProcessed
+	end
 end
 
 UserInputService.InputBegan:Connect(onInputBegan)
