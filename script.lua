@@ -4463,6 +4463,9 @@ CMDs[#CMDs + 1] = {NAME = 'exit', DESC = 'Kills roblox process'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'noclip', DESC = 'Go through objects'}
 CMDs[#CMDs + 1] = {NAME = 'unnoclip / clip', DESC = 'Disables noclip'}
+CMDs[#CMDs + 1] = {NAME = 'fly [speed]', DESC = 'Makes you fly'}
+CMDs[#CMDs + 1] = {NAME = 'unfly', DESC = 'Disables fly'}
+CMDs[#CMDs + 1] = {NAME = 'flyspeed [num]', DESC = 'Set fly speed (default is 20)'}
 CMDs[#CMDs + 1] = {NAME = 'vehiclenoclip / vnoclip', DESC = 'Turns off vehicle collision'}
 CMDs[#CMDs + 1] = {NAME = 'vehicleclip / vclip / unvnoclip', DESC = 'Enables vehicle collision'}
 CMDs[#CMDs + 1] = {NAME = 'float /  platform', DESC = 'Spawns a platform beneath you causing you to float'}
@@ -6957,13 +6960,8 @@ function sFLY(vfly)
 
 	local function FLY()
 		FLYING = true
-		local BG = Instance.new('BodyGyro')
 		local BV = Instance.new('BodyVelocity')
-		BG.P = 9e4
-		BG.Parent = T
 		BV.Parent = T
-		BG.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
-		BG.CFrame = T.CFrame
 		BV.Velocity = Vector3.new(0, 0, 0)
 		BV.MaxForce = Vector3.new(9e9, 9e9, 9e9)
 		task.spawn(function()
@@ -6986,7 +6984,6 @@ function sFLY(vfly)
 				else
 					BV.Velocity = Vector3.new(0, 0, 0)
 				end
-				BG.CFrame = camera.CFrame
 			until not FLYING
 			CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
 			lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
