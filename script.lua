@@ -6149,7 +6149,7 @@ function onInputEnded(input,gameProcessed)
 	end
 	local kc = input.KeyCode
 	if kc == Enum.KeyCode.W or kc == Enum.KeyCode.A or kc == Enum.KeyCode.S or kc == Enum.KeyCode.D then
-		canFLY = not gameProcessed
+		canFLY = true
 	end
 end
 
