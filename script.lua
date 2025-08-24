@@ -7052,23 +7052,23 @@ function sFLY()
 
 	flyConnection = RunService.RenderStepped:Connect(function()
 		if not rootPart or not humanoid or humanoid.Health <= 0 then return end
-		if not canFLY then return end
 
 		local moveDirection = Vector3.zero
 		local camCF = workspace.CurrentCamera.CFrame
 		local speed = (50 / 16) * (humanoid.WalkSpeed / 2.2)
-
-		if UserInputService:IsKeyDown(Enum.KeyCode.W) then
-			moveDirection += camCF.LookVector
-		end
-		if UserInputService:IsKeyDown(Enum.KeyCode.S) then
-			moveDirection -= camCF.LookVector
-		end
-		if UserInputService:IsKeyDown(Enum.KeyCode.A) then
-			moveDirection -= camCF.RightVector
-		end
-		if UserInputService:IsKeyDown(Enum.KeyCode.D) then
-			moveDirection += camCF.RightVector
+		if canFLY then
+			if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+				moveDirection += camCF.LookVector
+			end
+			if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+				moveDirection -= camCF.LookVector
+			end
+			if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+				moveDirection -= camCF.RightVector
+			end
+			if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+				moveDirection += camCF.RightVector
+			end
 		end
 		--[[if UserInputService:IsKeyDown(Enum.KeyCode.E) then
 			moveDirection += Vector3.yAxis
