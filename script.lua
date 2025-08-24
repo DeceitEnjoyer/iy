@@ -6095,8 +6095,6 @@ Exit_2.MouseButton1Click:Connect(function()
 	KeybindEditor:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
 end)
 
-canFLY = true
-
 function onInputBegan(input,gameProcessed)
 	if awaitingInput then
 		if input.UserInputType == Enum.UserInputType.Keyboard then
@@ -6131,10 +6129,6 @@ function onInputBegan(input,gameProcessed)
 			end
 		end
 	end
-	local kc = input.KeyCode
-	if kc == Enum.KeyCode.W or kc == Enum.KeyCode.A or kc == Enum.KeyCode.S or kc == Enum.KeyCode.D then
-		canFLY = not gameProcessed
-	end
 end
 
 function onInputEnded(input,gameProcessed)
@@ -6146,10 +6140,6 @@ function onInputEnded(input,gameProcessed)
 				end
 			end
 		end
-	end
-	local kc = input.KeyCode
-	if kc == Enum.KeyCode.W or kc == Enum.KeyCode.A or kc == Enum.KeyCode.S or kc == Enum.KeyCode.D then
-		canFLY = true
 	end
 end
 
@@ -7056,7 +7046,6 @@ function sFLY()
 		local moveDirection = Vector3.zero
 		local camCF = workspace.CurrentCamera.CFrame
 		local speed = (50 / 16) * (humanoid.WalkSpeed / 2.2)
-		if canFLY then
 			if UserInputService:IsKeyDown(Enum.KeyCode.W) then
 				moveDirection += camCF.LookVector
 			end
@@ -7069,7 +7058,6 @@ function sFLY()
 			if UserInputService:IsKeyDown(Enum.KeyCode.D) then
 				moveDirection += camCF.RightVector
 			end
-		end
 		--[[if UserInputService:IsKeyDown(Enum.KeyCode.E) then
 			moveDirection += Vector3.yAxis
 		end
