@@ -4465,7 +4465,7 @@ CMDs[#CMDs + 1] = {NAME = 'noclip', DESC = 'Go through objects'}
 CMDs[#CMDs + 1] = {NAME = 'unnoclip / clip', DESC = 'Disables noclip'}
 CMDs[#CMDs + 1] = {NAME = 'fly [speed]', DESC = 'Makes you fly'}
 CMDs[#CMDs + 1] = {NAME = 'unfly', DESC = 'Disables fly'}
-CMDs[#CMDs + 1] = {NAME = 'flyspeed [num]', DESC = 'Set fly speed (default is 20)'}
+CMDs[#CMDs + 1] = {NAME = 'flyspeed [num]', DESC = 'Set fly speed (-1 = based on walkspeed, 1 default)'}
 CMDs[#CMDs + 1] = {NAME = 'vehiclenoclip / vnoclip', DESC = 'Turns off vehicle collision'}
 CMDs[#CMDs + 1] = {NAME = 'vehicleclip / vclip / unvnoclip', DESC = 'Enables vehicle collision'}
 CMDs[#CMDs + 1] = {NAME = 'float /  platform', DESC = 'Spawns a platform beneath you causing you to float'}
@@ -6936,8 +6936,8 @@ addcmd('togglenoclip',{},function(args, speaker)
 end)
 
 FLYING = false
---[[QEfly = true
 iyflyspeed = 1
+--[[QEfly = true
 vehicleflyspeed = 1
 function sFLY(vfly)
 	local plr = Players.LocalPlayer
@@ -7045,7 +7045,7 @@ function sFLY()
 
 		local moveDirection = Vector3.zero
 		local camCF = workspace.CurrentCamera.CFrame
-		local speed = (50 / 16) * (humanoid.WalkSpeed / 2.2)
+		local speed = iyflyspeed == -1 and (50 / 16) * (humanoid.WalkSpeed / 2.2) or iyflyspeed * 50
 			if UserInputService:IsKeyDown(Enum.KeyCode.W) then
 				moveDirection += camCF.LookVector
 			end
