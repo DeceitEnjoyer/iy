@@ -7045,7 +7045,7 @@ function sFLY()
 
 		local moveDirection = Vector3.zero
 		local camCF = workspace.CurrentCamera.CFrame
-		local speed = iyflyspeed == -1 and (50 / 16) * (humanoid.WalkSpeed / 2.2) or iyflyspeed * 50
+		local speed = (iyflyspeed == -1 and (50 / 16) * (humanoid.WalkSpeed / 2.2)) or iyflyspeed * 50
 			if UserInputService:IsKeyDown(Enum.KeyCode.W) then
 				moveDirection += camCF.LookVector
 			end
